@@ -99,6 +99,7 @@ public class SeckillController {
         }
         return result;
 }
+
     @RequestMapping(value ="/time/now",method = RequestMethod.GET)
     @ResponseBody
     public SeckillResult<Long> getTime(){
