@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/seckill-common/seckill-common.iml" filepath="$PROJECT_DIR$/seckill-common/seckill-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-manage/seckill-manage.iml" filepath="$PROJECT_DIR$/seckill-manage/seckill-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-manage/seckill-manage-mapper/seckill-manage-mapper.iml" filepath="$PROJECT_DIR$/seckill-manage/seckill-manage-mapper/seckill-manage-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-manage/seckill-manage-pojo/seckill-manage-pojo.iml" filepath="$PROJECT_DIR$/seckill-manage/seckill-manage-pojo/seckill-manage-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-manage/seckill-manage-service/seckill-manage-service.iml" filepath="$PROJECT_DIR$/seckill-manage/seckill-manage-service/seckill-manage-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-manage/seckill-manage-web/seckill-manage-web.iml" filepath="$PROJECT_DIR$/seckill-manage/seckill-manage-web/seckill-manage-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seckill-parent/seckill-parent.iml" filepath="$PROJECT_DIR$/seckill-parent/seckill-parent.iml" />
+    </modules>
+  </component>
+</project>
