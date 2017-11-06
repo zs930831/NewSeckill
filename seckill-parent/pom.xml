@@ -29,9 +29,22 @@
         <pagehelper.version>3.4.2-fix</pagehelper.version>
         <jsqlparser.version>0.9.1</jsqlparser.version>
         <jedis.version>2.7.2</jedis.version>
+        <protostuff-core.version>1.0.8</protostuff-core.version>
+        <protostuff-runtime.version>1.0.8</protostuff-runtime.version>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <!--protostuff序列化-->
+            <dependency>
+                <groupId>com.dyuproject.protostuff</groupId>
+                <artifactId>protostuff-core</artifactId>
+                <version>${protostuff-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dyuproject.protostuff</groupId>
+                <artifactId>protostuff-runtime</artifactId>
+                <version>${protostuff-runtime.version}</version>
+            </dependency>
         <!-- 时间操作组件 -->
         <dependency>
             <groupId>joda-time</groupId>

@@ -8,6 +8,7 @@ import com.zs.seckill.exception.SeckillClosedException;
 import com.zs.seckill.exception.SeckillException;
 import com.zs.seckill.mapper.SeckillMapper;
 import com.zs.seckill.mapper.SuccessKilledMapper;
+import com.zs.seckill.mapper.dao.RedisDao;
 import com.zs.seckill.pojo.Seckill;
 import com.zs.seckill.pojo.SeckillExample;
 import com.zs.seckill.pojo.SuccessKilled;
@@ -27,6 +28,8 @@ public class SeckillServiceImpl implements SeckillService{
     private SeckillMapper seckillMapper;
     @Autowired
     private SuccessKilledMapper successKilledMapper;
+    @Autowired
+    private RedisDao redisDao;
     private static final String SALT="qW3124!@@$#%";
     @Override
     public List<Seckill> getSeckillList() {
@@ -48,10 +51,23 @@ public class SeckillServiceImpl implements SeckillService{
     }
 
     @Override
+    /**
+     *@Author:ZhangShuai
+     *@Description:用redis优化缓存。
+     *@Date: 20:47 2017/11/6
+     *@Modify Info:
+     */
     public Exposer createSeckillAddress(long seckillId) {
-        Seckill seckill = seckillMapper.selectByPrimaryKey(seckillId);
+        //优化点：缓存优化
+        Seckill seckill;
+        seckill=redisDao.getSeckill(seckillId);
         if ( seckill==null ){
-            return new Exposer(false,seckillId);
+            seckill = seckillMapper.selectByPrimaryKey(seckillId);
+            if ( seckill==null ){
+                return new Exposer(false,seckillId);
+            }else {
+                redisDao.setSeckill(seckill);
+            }
         }
         Date startTime = seckill.getStartTime();
         Date endTime = seckill.getEndTime();
@@ -64,11 +80,13 @@ public class SeckillServiceImpl implements SeckillService{
         String md5 = getMd5(seckillId);
         return new Exposer(true,md5,seckillId);
     }
+    
     private String getMd5(long seckillId){
         String s = seckillId + "/" + SALT;
         String md5DigestAsHex = DigestUtils.md5DigestAsHex(s.getBytes());
         return md5DigestAsHex;
     }
+    
     @Override
     @Transactional
     /**
@@ -98,7 +116,7 @@ public class SeckillServiceImpl implements SeckillService{
                 sc.setSeckillId(seckillId);
                 sc.setCreateTime(killTime);
                 sc.setUserPhone(userPhone);
-                int i = successKilledMapper.insert(sc);
+                int i = successKilledMapper.insert (sc);
                 System.out.println("i:"+i);
                 if ( i<=0){
                     //没有更新库存记录，说明秒杀结束 rollback

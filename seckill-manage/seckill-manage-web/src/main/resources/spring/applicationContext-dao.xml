@@ -30,4 +30,10 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.zs.seckill.mapper"></property>
 	</bean>
+
+	<!--RedisDao注入-->
+	<bean id="redisDao" class="com.zs.seckill.mapper.dao.RedisDao">
+		<constructor-arg index="0" value="192.168.149.131"/>
+		<constructor-arg index="1" value="6379"/>
+	</bean>
 </beans>
